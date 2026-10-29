@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "name": "sticky-note",
+  "version": "0.2.0",
+  "risk_tiers": [
+    {
+      "id": "tool/sticky_note_read",
+      "unit": "sticky-note",
+      "kind": "agent_tool",
+      "contract": "crm.yaml",
+      "operation": "agent.tool.invoke",
+      "operation_id": "stickyNoteRead",
+      "route": "/ext/sticky-note/notes",
+      "method": "GET",
+      "scopes": [
+        "read"
+      ],
+      "tier": "auto_execute",
+      "fragment_hash": "sha256:bdeb16dca59199eb9016f7cfed44a7bc1eb1c242a25d8e89e74684b9f7eb8c95",
+      "digest": "sha256:b27b35ee8ed09f507b076af48b61bacc8b5f91eb949ed92860cee862bc4674e0"
+    },
+    {
+      "id": "tool/sticky_note_save",
+      "unit": "sticky-note",
+      "kind": "agent_tool",
+      "contract": "crm.yaml",
+      "operation": "agent.tool.invoke",
+      "operation_id": "stickyNoteSave",
+      "route": "/ext/sticky-note/notes",
+      "method": "POST",
+      "scopes": [
+        "write"
+      ],
+      "tier": "auto_execute",
+      "fragment_hash": "sha256:a0802f20d738e1662a60358db0e5cadae5c5f6a3d8ba27ec50c8eba7925f7c0d",
+      "digest": "sha256:c071650d603d69ba5e5ad83c55bd5c566a1092ef626433c1f18ca6cfb041114d"
+    }
+  ]
+}

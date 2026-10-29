@@ -1,0 +1,138 @@
+# SPDX-License-Identifier: BUSL-1.1
+# SPDX-FileCopyrightText: 2026 Gradion
+#
+# Served at /v1/ext/sticky-note/notes: paths here are relative to /v1.
+overlay: 1.0.0
+info:
+  title: sticky-note
+  version: "0.2.0"
+actions:
+  - target: $.paths['/ext/sticky-note/notes']
+    update:
+      get:
+        operationId: stickyNoteRead
+        summary: Read the sticky notes one page shows, its own and the one on all pages.
+        tags: [Extensions]
+        x-rbac-object: ext_sticky_note_note
+        x-rbac-action: read
+        x-rbac-defaults:
+          admin: [read, create, update, delete]
+          management: [read, create, update, delete]
+          manager: [read, create, update, delete]
+          rep: [read, create, update, delete]
+          read_only: [read]
+        parameters:
+          - name: page
+            in: query
+            required: true
+            schema: { type: string, minLength: 1, maxLength: 300 }
+        x-mcp-tool:
+          verb: sticky_note_read
+          version: 1.0.0
+          title: Read a page's sticky notes
+          tier: auto_execute
+          scope: read
+          description: >-
+            Read the sticky note kept on one page of the app, named by its route
+            such as /contacts/<id>, and the note kept on all pages. Either is
+            null when there is none. It changes nothing.
+        responses:
+          '200':
+            description: The page's note and the note on all pages, each or null.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  additionalProperties: false
+                  required: [page, all]
+                  properties:
+                    page:
+                      type: [object, 'null']
+                      additionalProperties: false
+                      required: [id, page, body, updated_by, updated_at]
+                      properties:
+                        id: { type: string, format: uuid }
+                        page: { type: string }
+                        body: { type: string }
+                        updated_by: { type: string, format: uuid }
+                        updated_at: { type: string, format: date-time }
+                    all:
+                      type: [object, 'null']
+                      additionalProperties: false
+                      required: [id, page, body, updated_by, updated_at]
+                      properties:
+                        id: { type: string, format: uuid }
+                        page: { type: string }
+                        body: { type: string }
+                        updated_by: { type: string, format: uuid }
+                        updated_at: { type: string, format: date-time }
+          '401': { $ref: '#/components/responses/Unauthorized' }
+          '403': { $ref: '#/components/responses/Forbidden' }
+          '422': { $ref: '#/components/responses/ValidationError' }
+      post:
+        operationId: stickyNoteSave
+        summary: Save a page's sticky note, or the one on all pages; a blank body clears it.
+        tags: [Extensions]
+        x-rbac-object: ext_sticky_note_note
+        x-rbac-action: update
+        x-rbac-defaults:
+          admin: [read, create, update, delete]
+          management: [read, create, update, delete]
+          manager: [read, create, update, delete]
+          rep: [read, create, update, delete]
+          read_only: [read]
+        x-mcp-tool:
+          verb: sticky_note_save
+          version: 1.0.0
+          title: Save a sticky note
+          tier: auto_execute
+          scope: write
+          description: >-
+            Replace a sticky note with the given text, up to 2000 characters: the
+            note of the page named by its route when target is page, or the note
+            on all pages when target is all. A blank body removes the note.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required: [page, target, body]
+                properties:
+                  page: { type: string, minLength: 1, maxLength: 300 }
+                  target: { type: string, enum: [page, all] }
+                  body: { type: string, maxLength: 2000 }
+        responses:
+          '200':
+            description: The page's notes after the write.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  additionalProperties: false
+                  required: [page, all]
+                  properties:
+                    page:
+                      type: [object, 'null']
+                      additionalProperties: false
+                      required: [id, page, body, updated_by, updated_at]
+                      properties:
+                        id: { type: string, format: uuid }
+                        page: { type: string }
+                        body: { type: string }
+                        updated_by: { type: string, format: uuid }
+                        updated_at: { type: string, format: date-time }
+                    all:
+                      type: [object, 'null']
+                      additionalProperties: false
+                      required: [id, page, body, updated_by, updated_at]
+                      properties:
+                        id: { type: string, format: uuid }
+                        page: { type: string }
+                        body: { type: string }
+                        updated_by: { type: string, format: uuid }
+                        updated_at: { type: string, format: date-time }
+          '401': { $ref: '#/components/responses/Unauthorized' }
+          '403': { $ref: '#/components/responses/Forbidden' }
+          '422': { $ref: '#/components/responses/ValidationError' }

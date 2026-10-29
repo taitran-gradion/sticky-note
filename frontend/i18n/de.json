@@ -1,0 +1,17 @@
+{
+  "extStickyNote.title": "Haftnotiz",
+  "extStickyNote.open": "Haftnotiz",
+  "extStickyNote.count": "Haftnotizen ({count})",
+  "extStickyNote.close": "Schließen",
+  "extStickyNote.which": "Welche Notiz",
+  "extStickyNote.target.page": "Diese Seite",
+  "extStickyNote.target.all": "Alle Seiten",
+  "extStickyNote.placeholder": "Notiz schreiben…",
+  "extStickyNote.empty": "Noch keine Notiz",
+  "extStickyNote.updated": "Geändert {when}",
+  "extStickyNote.save": "Speichern",
+  "extStickyNote.clear": "Leeren",
+  "extStickyNote.needsGrant": "Ihre Rolle hat ext_sticky_note_note nicht. Ein Admin vergibt es unter Einstellungen, Rollen.",
+  "extStickyNote.where.title": "Die Notiz schwebt über jeder Seite",
+  "extStickyNote.where.body": "Klicken Sie unten rechts auf Haftnotiz. Jede Seite hat ihre eigene Notiz, und eine Notiz erscheint auf allen Seiten."
+}

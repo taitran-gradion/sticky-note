@@ -1,0 +1,17 @@
+{
+  "extStickyNote.title": "Sticky note",
+  "extStickyNote.open": "Sticky note",
+  "extStickyNote.count": "Sticky notes ({count})",
+  "extStickyNote.close": "Close",
+  "extStickyNote.which": "Which note",
+  "extStickyNote.target.page": "This page",
+  "extStickyNote.target.all": "All pages",
+  "extStickyNote.placeholder": "Write a note…",
+  "extStickyNote.empty": "No note yet",
+  "extStickyNote.updated": "Edited {when}",
+  "extStickyNote.save": "Save",
+  "extStickyNote.clear": "Clear",
+  "extStickyNote.needsGrant": "Your role does not hold ext_sticky_note_note. An admin grants it in Settings, Roles.",
+  "extStickyNote.where.title": "The note floats on every page",
+  "extStickyNote.where.body": "Press Sticky note at the bottom right of any page. Each page has its own note, and one note shows on all pages."
+}
