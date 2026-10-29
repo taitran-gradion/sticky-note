@@ -1,7 +1,5 @@
 {
   "extStickyNote.title": "Sticky note",
-  "extStickyNote.open": "Sticky note",
-  "extStickyNote.count": "Sticky notes ({count})",
   "extStickyNote.close": "Close",
   "extStickyNote.which": "Which note",
   "extStickyNote.target.page": "This page",
@@ -12,6 +10,16 @@
   "extStickyNote.save": "Save",
   "extStickyNote.clear": "Clear",
   "extStickyNote.needsGrant": "Your role does not hold ext_sticky_note_note. An admin grants it in Settings, Roles.",
-  "extStickyNote.where.title": "The note floats on every page",
-  "extStickyNote.where.body": "Press Sticky note at the bottom right of any page. Each page has its own note, and one note shows on all pages."
+  "extStickyNote.where.body": "Press the sticky note at the bottom right of any page, or Alt+N.",
+  "extStickyNote.has.page": "a note on this page",
+  "extStickyNote.has.all": "a note on all pages",
+  "extStickyNote.openShortcut": "Sticky note (Alt+N)",
+  "extStickyNote.allNotes": "All notes",
+  "extStickyNote.list.title": "Sticky notes",
+  "extStickyNote.list.sub": "Every note, the most recently edited first. Open a row to go to its page.",
+  "extStickyNote.list.failed": "The notes could not be read",
+  "extStickyNote.list.empty": "No notes yet",
+  "extStickyNote.list.page": "Page",
+  "extStickyNote.list.note": "Note",
+  "extStickyNote.list.edited": "Edited"
 }

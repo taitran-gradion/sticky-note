@@ -1,8 +1,24 @@
 {
   "schema": 1,
   "name": "sticky-note",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "risk_tiers": [
+    {
+      "id": "tool/sticky_note_list",
+      "unit": "sticky-note",
+      "kind": "agent_tool",
+      "contract": "crm.yaml",
+      "operation": "agent.tool.invoke",
+      "operation_id": "stickyNoteList",
+      "route": "/ext/sticky-note/list",
+      "method": "GET",
+      "scopes": [
+        "read"
+      ],
+      "tier": "auto_execute",
+      "fragment_hash": "sha256:ea4e1b4fc2ec8e7c13b5b90a2b425e1b6f30a3ac25b2135461fc2ec2b964bb71",
+      "digest": "sha256:0df295d031fc127f835e459e05b49c987f52ffc23b0f717f4f87c247d0e8427d"
+    },
     {
       "id": "tool/sticky_note_read",
       "unit": "sticky-note",

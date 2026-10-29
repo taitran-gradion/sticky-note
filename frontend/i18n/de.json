@@ -1,7 +1,5 @@
 {
   "extStickyNote.title": "Haftnotiz",
-  "extStickyNote.open": "Haftnotiz",
-  "extStickyNote.count": "Haftnotizen ({count})",
   "extStickyNote.close": "Schließen",
   "extStickyNote.which": "Welche Notiz",
   "extStickyNote.target.page": "Diese Seite",
@@ -12,6 +10,16 @@
   "extStickyNote.save": "Speichern",
   "extStickyNote.clear": "Leeren",
   "extStickyNote.needsGrant": "Ihre Rolle hat ext_sticky_note_note nicht. Ein Admin vergibt es unter Einstellungen, Rollen.",
-  "extStickyNote.where.title": "Die Notiz schwebt über jeder Seite",
-  "extStickyNote.where.body": "Klicken Sie unten rechts auf Haftnotiz. Jede Seite hat ihre eigene Notiz, und eine Notiz erscheint auf allen Seiten."
+  "extStickyNote.where.body": "Klicken Sie unten rechts auf die Haftnotiz, oder drücken Sie Alt+N.",
+  "extStickyNote.has.page": "eine Notiz auf dieser Seite",
+  "extStickyNote.has.all": "eine Notiz auf allen Seiten",
+  "extStickyNote.openShortcut": "Haftnotiz (Alt+N)",
+  "extStickyNote.allNotes": "Alle Notizen",
+  "extStickyNote.list.title": "Haftnotizen",
+  "extStickyNote.list.sub": "Alle Notizen, die zuletzt geänderte zuerst. Eine Zeile öffnet ihre Seite.",
+  "extStickyNote.list.failed": "Die Notizen konnten nicht gelesen werden",
+  "extStickyNote.list.empty": "Noch keine Notizen",
+  "extStickyNote.list.page": "Seite",
+  "extStickyNote.list.note": "Notiz",
+  "extStickyNote.list.edited": "Geändert"
 }

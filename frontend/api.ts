@@ -19,6 +19,18 @@ export function useStickyNotes(page: string) {
   });
 }
 
+// Every note, the most recently edited first.
+export function useAllStickyNotes() {
+  return useQuery({
+    queryKey: ["ext", "sticky-note", "list"],
+    queryFn: async () => {
+      const { data, error } = await api.GET("/ext/sticky-note/list");
+      if (error) throwProblem(error);
+      return data.notes;
+    },
+  });
+}
+
 // Saves one of the two notes; a blank body clears it.
 export function useSaveStickyNote(page: string) {
   const client = useQueryClient();
@@ -30,8 +42,8 @@ export function useSaveStickyNote(page: string) {
     },
     onSuccess: (notes) => {
       client.setQueryData(notesKey(page), notes);
-      // The note on all pages shows on every other page too.
-      void client.invalidateQueries({ queryKey: ["ext", "sticky-note", "notes"] });
+      // The note on all pages shows on every other page too, and every note on the list.
+      void client.invalidateQueries({ queryKey: ["ext", "sticky-note"] });
     },
   });
 }

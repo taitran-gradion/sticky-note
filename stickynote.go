@@ -4,10 +4,10 @@
 // Package stickynote keeps a sticky note on every page of the app: one note
 // per page, and one shown on all pages.
 //
-//	note.go       its two routes: read the notes a page shows, and save or clear one
+//	note.go       its routes: read the notes a page shows, save or clear one, list them all
 //	migrations/   its table, one row per page that has a note
 //	api/          its routes, merged into core's contract
-//	frontend/     the note that floats over every page
+//	frontend/     the note that floats over every page, and the all-notes page
 package stickynote
 
 import (
@@ -23,11 +23,12 @@ var migrations embed.FS
 func New() extension.Extension {
 	return extension.Extension{
 		Name:        "sticky-note",
-		Version:     "0.2.0",
+		Version:     "0.3.0",
 		Description: "A sticky note floating over every page: one note per page, and one shown on all pages.",
 		Tools: []extension.Tool{
 			{Name: "sticky_note_read", Handle: readNotes},
 			{Name: "sticky_note_save", Handle: saveNote},
+			{Name: "sticky_note_list", Handle: listNotes},
 		},
 		Migrations: migrations,
 	}

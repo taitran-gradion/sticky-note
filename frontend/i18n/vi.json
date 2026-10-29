@@ -1,7 +1,5 @@
 {
   "extStickyNote.title": "Ghi chú dán",
-  "extStickyNote.open": "Ghi chú dán",
-  "extStickyNote.count": "Ghi chú dán ({count})",
   "extStickyNote.close": "Đóng",
   "extStickyNote.which": "Ghi chú nào",
   "extStickyNote.target.page": "Trang này",
@@ -12,6 +10,16 @@
   "extStickyNote.save": "Lưu",
   "extStickyNote.clear": "Xoá",
   "extStickyNote.needsGrant": "Vai trò của bạn chưa có ext_sticky_note_note. Quản trị viên cấp quyền trong Cài đặt, Vai trò.",
-  "extStickyNote.where.title": "Ghi chú nổi trên mọi trang",
-  "extStickyNote.where.body": "Bấm Ghi chú dán ở góc dưới bên phải của bất kỳ trang nào. Mỗi trang có ghi chú riêng, và một ghi chú hiện trên mọi trang."
+  "extStickyNote.where.body": "Bấm ghi chú dán ở góc dưới bên phải của trang bất kỳ, hoặc Alt+N.",
+  "extStickyNote.has.page": "có ghi chú ở trang này",
+  "extStickyNote.has.all": "có ghi chú ở mọi trang",
+  "extStickyNote.openShortcut": "Ghi chú dán (Alt+N)",
+  "extStickyNote.allNotes": "Tất cả ghi chú",
+  "extStickyNote.list.title": "Ghi chú dán",
+  "extStickyNote.list.sub": "Mọi ghi chú, mới sửa nhất trước. Mở một dòng để đến trang của nó.",
+  "extStickyNote.list.failed": "Không đọc được ghi chú",
+  "extStickyNote.list.empty": "Chưa có ghi chú",
+  "extStickyNote.list.page": "Trang",
+  "extStickyNote.list.note": "Ghi chú",
+  "extStickyNote.list.edited": "Sửa lúc"
 }

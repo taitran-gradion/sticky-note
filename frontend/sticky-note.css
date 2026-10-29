@@ -32,8 +32,13 @@
 .ext-sticky-note-badge {
   position: absolute;
   top: calc(-1 * var(--space-1));
-  right: calc(-1 * var(--space-1));
   line-height: 1;
+}
+.ext-sticky-note-badge-page {
+  right: calc(-1 * var(--space-1));
+}
+.ext-sticky-note-badge-all {
+  left: calc(-1 * var(--space-1));
 }
 
 /* Open: a solid yellow paper note, never the page's glass. The text is
@@ -82,6 +87,13 @@
   white-space: nowrap;
 }
 .ext-sticky-note-foot > :last-child {
+  flex: none;
+  flex-wrap: nowrap;
+}
+.ext-sticky-note-head {
+  flex-wrap: nowrap;
+}
+.ext-sticky-note-head > :last-child {
   flex: none;
   flex-wrap: nowrap;
 }

@@ -1,8 +1,8 @@
-import { LocaleProvider, useT } from "@margince/frontend/app";
-import { EmptyState, SectionHeader } from "@margince/frontend/design-system";
+import { LocaleProvider } from "@margince/frontend/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
 import { FloatingNote } from "./floating";
+import { AllNotesPage } from "./page";
 import "./sticky-note.css";
 
 // Core imports every extension's entry when the app starts, and gives a unit
@@ -22,13 +22,5 @@ if (typeof document !== "undefined" && !document.getElementById(hostId)) {
   );
 }
 
-// #/ext/sticky-note: says where the note is.
-export default function StickyNotePage() {
-  const t = useT();
-  return (
-    <div className="wrap narrow">
-      <SectionHeader title={t("extStickyNote.title")} level={1} />
-      <EmptyState title={t("extStickyNote.where.title")}>{t("extStickyNote.where.body")}</EmptyState>
-    </div>
-  );
-}
+// #/ext/sticky-note: every note, opened from the floating note's list button.
+export default AllNotesPage;

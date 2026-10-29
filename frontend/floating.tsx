@@ -1,10 +1,10 @@
 import { problemMessageOf } from "@margince/frontend/api";
 import { useLocale, useT } from "@margince/frontend/app";
 import { Badge, Button, IconAction, Row, SegmentedControl } from "@margince/frontend/design-system";
-import { StickyNote, Trash2, X } from "lucide-react";
+import { List, StickyNote, Trash2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { refusedForRole, signedOut, type Target, useSaveStickyNote, useStickyNotes } from "./api";
-import { useCurrentPage } from "./page";
+import { useCurrentPage } from "./route";
 
 const maxLength = 2000;
 const targets = ["page", "all"] as const;
@@ -16,8 +16,29 @@ export function FloatingNote() {
   const page = useCurrentPage();
   const notes = useStickyNotes(page);
   const [open, setOpen] = useState(false);
+  // Alt+N opens and closes the note from any page; Escape closes it.
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.altKey && !event.ctrlKey && !event.metaKey && event.code === "KeyN") {
+        event.preventDefault();
+        setOpen((was) => !was);
+      } else if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
   if (signedOut(notes.error)) return null;
-  const count = Number(Boolean(notes.data?.page)) + Number(Boolean(notes.data?.all));
+  const onPage = Boolean(notes.data?.page);
+  const onAll = Boolean(notes.data?.all);
+  const label = [
+    t("extStickyNote.openShortcut"),
+    onPage && t("extStickyNote.has.page"),
+    onAll && t("extStickyNote.has.all"),
+  ]
+    .filter(Boolean)
+    .join(" · ");
   return (
     <div className="ext-sticky-note">
       {open ? (
@@ -26,15 +47,23 @@ export function FloatingNote() {
         <button
           type="button"
           className="ext-sticky-note-fab"
-          title={t("extStickyNote.open")}
-          aria-label={count > 0 ? t("extStickyNote.count", { count: String(count) }) : t("extStickyNote.open")}
+          title={label}
+          aria-label={label}
           onClick={() => setOpen(true)}
         >
           <StickyNote size={22} aria-hidden />
-          {count > 0 && (
-            <span className="ext-sticky-note-badge" aria-hidden>
+          {/* One badge per note: this page's at the top right, all pages' at the top left. */}
+          {onPage && (
+            <span className="ext-sticky-note-badge ext-sticky-note-badge-page" aria-hidden>
               <Badge variant="primary" tone="danger">
-                {String(count)}
+                1
+              </Badge>
+            </span>
+          )}
+          {onAll && (
+            <span className="ext-sticky-note-badge ext-sticky-note-badge-all" aria-hidden>
+              <Badge variant="primary" tone="info">
+                1
               </Badge>
             </span>
           )}
@@ -72,10 +101,13 @@ function NoteEditor({ page, onClose }: Readonly<{ page: string; onClose: () => v
           onChange={setTarget}
           labels={{ page: t("extStickyNote.target.page"), all: t("extStickyNote.target.all") }}
         />
-        <IconAction label={t("extStickyNote.close")} icon={<X size={16} aria-hidden />} onClick={onClose} />
+        <Row gap="1">
+          <IconAction label={t("extStickyNote.allNotes")} icon={<List size={16} aria-hidden />} href="#/ext/sticky-note" />
+          <IconAction label={t("extStickyNote.close")} icon={<X size={16} aria-hidden />} onClick={onClose} />
+        </Row>
       </div>
       <textarea
-                aria-label={target === "page" ? t("extStickyNote.target.page") : t("extStickyNote.target.all")}
+        aria-label={target === "page" ? t("extStickyNote.target.page") : t("extStickyNote.target.all")}
         placeholder={t("extStickyNote.placeholder")}
         rows={6}
         maxLength={maxLength}

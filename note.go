@@ -18,6 +18,7 @@ const (
 	noteEntity    = "ext_sticky_note_page_note"
 	maxNoteLength = 2000
 	maxPageLength = 300
+	listedNotes   = 200
 	// allPages keys the note shown on every page.
 	allPages = "*"
 )
@@ -57,6 +58,35 @@ func readNotes(ctx context.Context, rt extension.Runtime, in json.RawMessage) (j
 		return nil, err
 	}
 	return json.Marshal(out)
+}
+
+// listNotes answers GET /ext/sticky-note/list: every note, the most recently
+// edited first.
+func listNotes(ctx context.Context, rt extension.Runtime, _ json.RawMessage) (json.RawMessage, error) {
+	notes := []note{}
+	err := rt.Tx(ctx, func(ctx context.Context, tx extension.Tx) error {
+		rows, err := tx.Query(ctx, `
+			SELECT id::text, page, body, updated_by::text, updated_at
+			FROM ext.ext_sticky_note_page_note
+			ORDER BY updated_at DESC
+			LIMIT $1`, listedNotes)
+		if err != nil {
+			return err
+		}
+		defer rows.Close()
+		for rows.Next() {
+			var n note
+			if err := rows.Scan(&n.ID, &n.Page, &n.Body, &n.UpdatedBy, &n.UpdatedAt); err != nil {
+				return err
+			}
+			notes = append(notes, n)
+		}
+		return rows.Err()
+	})
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(map[string][]note{"notes": notes})
 }
 
 // saveNote answers POST /ext/sticky-note/notes: it writes one page's note, or

@@ -5,7 +5,7 @@
 overlay: 1.0.0
 info:
   title: sticky-note
-  version: "0.2.0"
+  version: "0.3.0"
 actions:
   - target: $.paths['/ext/sticky-note/notes']
     update:
@@ -136,3 +136,51 @@ actions:
           '401': { $ref: '#/components/responses/Unauthorized' }
           '403': { $ref: '#/components/responses/Forbidden' }
           '422': { $ref: '#/components/responses/ValidationError' }
+  - target: $.paths['/ext/sticky-note/list']
+    update:
+      get:
+        operationId: stickyNoteList
+        summary: List every sticky note, the most recently edited first.
+        tags: [Extensions]
+        x-rbac-object: ext_sticky_note_note
+        x-rbac-action: read
+        x-rbac-defaults:
+          admin: [read, create, update, delete]
+          management: [read, create, update, delete]
+          manager: [read, create, update, delete]
+          rep: [read, create, update, delete]
+          read_only: [read]
+        x-mcp-tool:
+          verb: sticky_note_list
+          version: 1.0.0
+          title: List sticky notes
+          tier: auto_execute
+          scope: read
+          description: >-
+            List the sticky notes kept on pages of the app, up to 200, the most
+            recently edited first. A note whose page is * shows on all pages. It
+            changes nothing.
+        responses:
+          '200':
+            description: The notes, the most recently edited first.
+            content:
+              application/json:
+                schema:
+                  type: object
+                  additionalProperties: false
+                  required: [notes]
+                  properties:
+                    notes:
+                      type: array
+                      items:
+                        type: object
+                        additionalProperties: false
+                        required: [id, page, body, updated_by, updated_at]
+                        properties:
+                          id: { type: string, format: uuid }
+                          page: { type: string }
+                          body: { type: string }
+                          updated_by: { type: string, format: uuid }
+                          updated_at: { type: string, format: date-time }
+          '401': { $ref: '#/components/responses/Unauthorized' }
+          '403': { $ref: '#/components/responses/Forbidden' }
